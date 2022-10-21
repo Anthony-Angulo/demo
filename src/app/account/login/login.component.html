@@ -1,0 +1,20 @@
+<body>
+  <div class="grid" style="height: -webkit-fill-available;">
+    <div class="col-8" style="padding: 0 !important;">
+      <img src="../../../assets/images/carga1.png" style="max-width: 100%; height: 100%;" class="img-fluid"
+        alt="Responsive image">
+    </div>
+    <div class="col" style="padding: 0 !important;">
+      <div class="login-page">
+        <div class="form">
+          <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <img src="../../../assets/images/logo1.PNG" style="max-width: 90%; height: 90%;" class="image-res"/>
+            <input type="text" formControlName="email" placeholder="Correo"/>
+            <input type="password" formControlName="password" placeholder="Contraseña"/>
+            <button type="submit">Iniciar Sesion</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+</body>

@@ -1,0 +1,238 @@
+<p-card>
+  <p-toolbar>
+    <ng-template pTemplate="left">
+      <button
+        pButton
+        pRipple
+        label="Agregar"
+        icon="pi pi-plus"
+        class="p-button-success p-mr-2 p-button-raised"
+        (click)="openCreateClient()"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+</p-card>
+
+<!-- <p-card> -->
+<p-table
+  #dt1
+  [value]="clientes"
+  styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
+  [showCurrentPageReport]="true"
+  [globalFilterFields]="[
+    'Codigo',
+    'Nombre',
+    'NombreExtranjero',
+    'RFC',
+    'Ciudad'
+  ]"
+  stateStorage="local"
+  [paginator]="true"
+  [rows]="5"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <span class="p-input-icon-left ml-auto">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search keyword"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Codigo</th>
+      <th>Nombre</th>
+      <th>Nombre Fantasia</th>
+      <th>RFC</th>
+      <th>Cuidad</th>
+      <th style="width: 10rem"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-client>
+    <tr>
+      <td>{{ client.Codigo }}</td>
+      <td>{{ client.Nombre }}</td>
+      <td>{{ client.NombreExtranjero }}</td>
+      <td>{{ client.RFC }}</td>
+      <td>{{ client.Ciudad }}</td>
+      <td>
+        <button
+          type="button"
+          pButton
+          pRipple
+          style="margin: 5px"
+          class="p-button-warning p-button-sm p-button-rounded"
+          icon="pi pi-pencil"
+          (click)="openEditModal(client)"
+        ></button>
+        <button
+          type="button"
+          pButton
+          pRipple
+          style="margin: 5px"
+          class="p-button-danger p-button-sm p-button-rounded"
+          icon="pi pi-trash"
+          (click)="deleteClient(client)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<!-- </p-card> -->
+
+<p-dialog
+  [(visible)]="openCreate"
+  [closable]="false"
+  [contentStyle]="{ overflow: 'visible' }"
+  [style]="{ '960px': '75vw', '640px': '100vw' }"
+  header="Agregar Cliente"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="formgrid grid">
+      <div class="field col">
+        <label>Codigo De Cliente</label>
+        <input type="text" id="codigo" pInputText [(ngModel)]="newClient.Codigo" />
+      </div>
+      <div class="field col">
+        <label>Nombre De Cliente</label>
+        <input type="text" id="nombre" pInputText [(ngModel)]="newClient.Nombre"/>
+      </div>
+      <div class="field col">
+        <label>Nombre Fantasia</label>
+        <input type="text" id="nombreExtranjero" pInputText [(ngModel)]="newClient.NombreExtranjero"/>
+      </div>
+      <div class="field col">
+        <label>RFC</label>
+        <input type="text" id="rfc" pInputText [(ngModel)]="newClient.RFC"/>
+      </div>
+    </div>
+    <div class="formgrid grid">
+      <div class="field col">
+        <label>Calle</label>
+        <input type="text" id="calle" pInputText [(ngModel)]="newClient.Calle" />
+      </div>
+      <div class="field col">
+        <label>Colonia</label>
+        <input type="text" id="colonia" pInputText [(ngModel)]="newClient.Colonia" />
+      </div>
+      <div class="field col">
+        <label>Cuidad</label>
+        <input type="text" id="cuidad" pInputText [(ngModel)]="newClient.Ciudad" />
+      </div>
+    </div>
+    <div class="formgrid grid">
+      <div class="field col">
+        <label>Estado</label>
+        <input type="text" id="estado" pInputText [(ngModel)]="newClient.Estado" />
+      </div>
+      <div class="field col">
+        <label>Pais</label>
+        <input type="text" id="pais" pInputText [(ngModel)]="newClient.Pais" />
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="closeUsuarioCreate()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Guardar"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="createUser()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="openEdit"
+  [closable]="false"
+  [contentStyle]="{ overflow: 'visible' }"
+  [style]="{ '960px': '75vw', '640px': '100vw' }"
+  header="Modificar Cliente"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+<ng-template pTemplate="content">
+  <div class="formgrid grid">
+    <div class="field col">
+      <label>Codigo De Cliente</label>
+      <input type="text" id="codigo" pInputText [(ngModel)]="newClient.Codigo" />
+    </div>
+    <div class="field col">
+      <label>Nombre De Cliente</label>
+      <input type="text" id="nombre" pInputText [(ngModel)]="newClient.Nombre"/>
+    </div>
+    <div class="field col">
+      <label>Nombre Fantasia</label>
+      <input type="text" id="nombreExtranjero" pInputText [(ngModel)]="newClient.NombreExtranjero"/>
+    </div>
+    <div class="field col">
+      <label>RFC</label>
+      <input type="text" id="rfc" pInputText [(ngModel)]="newClient.RFC"/>
+    </div>
+  </div>
+  <div class="formgrid grid">
+    <div class="field col">
+      <label>Calle</label>
+      <input type="text" id="calle" pInputText [(ngModel)]="newClient.Calle" />
+    </div>
+    <div class="field col">
+      <label>Colonia</label>
+      <input type="text" id="colonia" pInputText [(ngModel)]="newClient.Colonia" />
+    </div>
+    <div class="field col">
+      <label>Cuidad</label>
+      <input type="text" id="cuidad" pInputText [(ngModel)]="newClient.Ciudad" />
+    </div>
+  </div>
+  <div class="formgrid grid">
+    <div class="field col">
+      <label>Estado</label>
+      <input type="text" id="estado" pInputText [(ngModel)]="newClient.Estado" />
+    </div>
+    <div class="field col">
+      <label>Pais</label>
+      <input type="text" id="pais" pInputText [(ngModel)]="newClient.Pais" />
+    </div>
+  </div>
+</ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="closeUsuarioCreate()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Modificar"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="updateClient()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+
+<p-confirmDialog
+  header="Eliminar Cliente"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>

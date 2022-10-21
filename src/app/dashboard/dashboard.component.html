@@ -1,0 +1,97 @@
+
+
+<div class="grid">
+    <div class="col">
+        <p-card [style]="{background: '#DBF4A0'}">
+            <ng-template pTemplate="header">
+                <div style="padding-left: 10px; padding-top: 10px;font-weight: bold; font-size: 20px; left: 0;">
+                    <span class="icon"><i class="fas fa-user fa-2xl"></i></span> Usuarios Registrados
+                </div>
+            </ng-template>
+                <div class="grid">
+                    <div class="col-8" style="font-weight: bold;font-size: 50px; ">
+                        20
+                    </div>
+                    <div class="col" style="font-weight: bold;font-size: 30px;">
+                        ir <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+        </p-card>
+    </div>
+    <div class="col">
+        <p-card [style]="{background: '#F7C6FC'}">
+            <ng-template pTemplate="header">
+                <div style="padding-left: 10px; padding-top: 10px;font-weight: bold; font-size: 20px; left: 0;">
+                    <span class="icon"><i class="fas fa-users"></i></span> Clientes
+                </div>
+            </ng-template>
+                <div class="grid">
+                    <div class="col-8" style="font-weight: bold;font-size: 50px; ">
+                       50
+                    </div>
+                    <div class="col" style="font-weight: bold;font-size: 30px;">
+                        ir <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+        </p-card>
+    </div>
+    <div class="col">
+        <p-card [style]="{background: '#FBE1AC'}">
+            <ng-template pTemplate="header">
+                <div style="padding-left: 10px; padding-top: 10px;font-weight: bold; font-size: 20px; left: 0;">
+                    <span class="icon"><i class="fas fa-clipboard-check"></i></span> Creditos Autorizados
+                </div>
+            </ng-template>
+                <div class="grid">
+                    <div class="col-8" style="font-weight: bold;font-size: 50px; ">
+                       158
+                    </div>
+                    <div class="col" style="font-weight: bold;font-size: 30px;">
+                        ir <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+        </p-card>
+    </div>
+    <div class="col">
+        <p-card [style]="{background: '#ACEFFB'}">
+            <ng-template pTemplate="header">
+                <div style="padding-left: 10px; padding-top: 10px;font-weight: bold; font-size: 20px; left: 0;">
+                    <span class="icon"><i class="fas fa-hourglass-half"></i></span> Creditos Pendientes
+                </div>
+            </ng-template>
+                <div class="grid">
+                    <div class="col-8" style="font-weight: bold;font-size: 50px; ">
+                       36
+                    </div>
+                    <div class="col" style="font-weight: bold;font-size: 30px;">
+                        ir <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+        </p-card>
+    </div>
+</div>
+
+<div class="grid" style="padding-top: 20px;">
+    <div class="col-6">
+        <p-card>
+            <ng-template pTemplate="header">
+                <div style="padding-left: 10px; padding-top: 10px;font-weight: bold; font-size: 20px; left: 0;">
+                    Creditos Autorizados x Rechazados Por Dia
+                </div>
+            </ng-template>
+            <canvas id="barChart"></canvas>
+        </p-card>
+    </div>
+    <div class="col-6">
+        <p-card>
+            <ng-template pTemplate="header">
+                <div style="padding-left: 10px; padding-top: 10px;font-weight: bold; font-size: 20px; left: 0;">
+                    Creditos Rechazados Por Mes
+                </div>
+            </ng-template>
+            <canvas id="lineChart"></canvas>
+        </p-card>
+    </div>
+</div>
+
+
