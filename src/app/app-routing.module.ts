@@ -24,7 +24,13 @@ const routes: Routes = [
   },{
     path: 'clientes',
     loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
-  },
+  },{
+    path: 'facturas',
+    loadChildren: () => import('./facturas/facturas.module').then(m => m.FacturasModule)
+  },{
+    path: 'asignacion',
+    loadChildren: () => import('./asignacion/asignacion.module').then(m => m.AsignacionModule)
+  }
 ];
 
 @NgModule({

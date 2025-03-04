@@ -6,7 +6,7 @@ body {
 }
 
 .login-page {
-  background: #102d5c;
+  background: #FFFFFF;
   background-size: cover;
   height: 950px; /* You must set a specified height */
   max-width:100%;
@@ -17,7 +17,7 @@ body {
 .form {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background: #102d5c;
   max-width: 360px;
   margin: 0 auto 100px;
   margin-top: 100px;
@@ -31,7 +31,7 @@ body {
   background: #f2f2f2;
   width: 100%;
   border: 0;
-  margin: 0 0 15px;
+  margin: 5px 0px 10px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
@@ -40,7 +40,7 @@ body {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #102d5c;;
+  background: red;;
   width: 100%;
   border: 0;
   padding: 15px;

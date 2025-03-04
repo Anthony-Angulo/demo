@@ -1,0 +1,128 @@
+<p-toolbar>
+    <ng-template pTemplate="right">
+        <button pButton pRipple label="Tipo de Cambio" icon="pi pi-dollar"
+            class="p-button-primary p-mr-2 p-button-raised" (click)="openTipoCambio()"></button>
+    </ng-template>
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="Agregar asignacion" icon="pi pi-plus"
+            class="p-button-success p-mr-2 p-button-raised" (click)="openCreateAsignacion()"></button>
+    </ng-template>
+</p-toolbar>
+
+<p-table #dt1 [value]="asignaciones" styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
+    [showCurrentPageReport]="true" [globalFilterFields]="[
+      'id',
+      'Nombre',
+      'UserName',
+      'Status',
+      'DateCreated',
+    ]" stateStorage="local" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                    placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Identificador</th>
+            <th>Nombre de Ruta</th>
+            <th>Usuario Cobrador</th>
+            <th>Estatus</th>
+            <th>Fecha De Ruta</th>
+            <th style="width: 10rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-asg>
+        <tr>
+            <td>{{ asg.id }}</td>
+            <td>{{ asg.Nombre }}</td>
+            <td>{{ asg.UserName }}</td>
+            <td>{{ asg.Label }}</td>
+            <td>{{ asg.FechaDeRuta }}</td>
+            <td>
+                <button type="button" pButton pRipple style="margin: 5px"
+                    class="p-button-warning p-button-sm p-button-rounded" icon="pi pi-search"
+                    (click)="viewAsginacon(asg)"></button>
+                <button type="button" pButton pRipple style="margin: 5px"
+                    class="p-button-danger p-button-sm p-button-rounded" icon="pi pi-trash"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="openCreate" [closable]="false" [contentStyle]="{ overflow: 'visible' }"
+    [style]="{ width: '1000px' }" header="Agregar Asignacion" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="grid">
+            <div class="col-3">
+                <label>Cobrador</label>
+                <p-dropdown [options]="usuarios" [(ngModel)]="usuario" [filter]="true" filterBy="Name"
+                    optionLabel="Name" optionValue="Id" placeholder="Selecciona un usuario">
+                </p-dropdown>
+            </div>
+            <div class="col-2">
+                <label>Zonas</label>
+                <p-dropdown [options]="zonas" [(ngModel)]="zonaSeleccionada" [filter]="true" filterBy="Name"
+                    optionLabel="Name" optionValue="Code" (onChange)="getFacturas()"
+                    placeholder="Selecciona una zona"></p-dropdown>
+            </div>
+            <div class="col-4">
+                <label>Clientes</label>
+                <p-dropdown [options]="clientes" [(ngModel)]="clienteSeleccionado" [filter]="true" filterBy="CardName"
+                    optionLabel="cardName" optionValue="cardName" (onChange)="addFacturaCombo()"
+                    placeholder="Selecciona un cliente"></p-dropdown>
+            </div>
+            <div class="col-3">
+                <label>Facturas</label>
+                <p-dropdown [options]="facturasClientes" [(ngModel)]="facturaSeleccionada" [filter]="true" filterBy="DocNum"
+                    optionLabel="DocNum" optionValue="DocNum" (onChange)="addFacturaCliente()"
+                    placeholder="Selecciona una factura"></p-dropdown>
+            </div>
+            <div class="col-12">
+                <p-orderList [stripedRows]="true" [value]="facturasAgregadas" [listStyle]="{ 'max-height': '30rem' }"
+                    header="Lista de Facturas" [dragdrop]="true">
+                    <ng-template let-fac pTemplate="item">
+                        <div class="product-item">
+                            <div class="product-list-detail">
+                                <h5 class="mb-2">{{ fac.DocNum }} -- {{ fac.CardName }}</h5>
+                            </div>
+                            <div class="product-list-action">
+                                <button type="button" pButton pRipple
+                                    class="p-button-danger p-button-sm p-button-rounded" icon="pi pi-trash"></button>
+
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-orderList>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
+            (click)="closeCreate()"></button>
+        <button pButton pRipple label="Agregar" icon="pi pi-check" class="p-button-text"
+            (click)="agregarAsignacion()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="openCambio" [closable]="true" [contentStyle]="{ overflow: 'visible' }"
+[style]="{ '960px': '75vw', '640px': '100vw' }" header="Modificar Tipo de Cambio" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field col">
+            <label>Tipo de Cambio</label>
+            <input type="text" id="nombre" pInputText [(ngModel)]="cambio" />
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
+            (click)="closeCambio()"></button>
+        <button pButton pRipple label="Agregar" icon="pi pi-check" class="p-button-text"
+            (click)="agregarCambio()"></button>
+    </ng-template>
+</p-dialog>
